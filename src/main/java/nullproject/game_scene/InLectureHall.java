@@ -1,52 +1,47 @@
-package nullproject.menu;
+package nullproject.game_scene;
 
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.InitImage;
-import nullproject.game_scene.InLectureHall;
 
-public class MainMenu {
+public class InLectureHall {
 
-    private static MainMenu ourInstance = new MainMenu(); //Class instance
+    private static InLectureHall ourInstance = new InLectureHall(); //Class instance
 
-    public static MainMenu getInstance() {
+    public static InLectureHall getInstance() {
         return ourInstance;
     } //Static method for working with a class
 
     //Forbid to create an instance
-    private MainMenu() {
-    }
+    private InLectureHall() {}
 
-    public void start() {
-        Stage stage = new Stage();
+    public void start(Stage stage) {
         Pane pane = new Pane();
+
+        pane.setOpacity(0);
+
+        Animation.fadeTransition(pane, 1, 0, 1);
+        Animation.getFadeTransition().setOnFinished(e -> {
+            Animation.getFadeTransition().stop();
+        });
+
         Scene scene = new Scene(pane, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
-        ImageView viewMain = new ImageView(InitImage.imageMainMenu);
+        ImageView viewMain = new ImageView(InitImage.imageInLectureHall);
 
         //Set fixed width and height
         viewMain.fitWidthProperty().bind(scene.widthProperty());
         viewMain.fitHeightProperty().bind(scene.heightProperty());
-
-        //Initialize keyboard click for scene
-        scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.S) {
-                Animation.fadeTransition(pane, 1, 1, 0);
-                Animation.getFadeTransition().setOnFinished(event -> {
-                    InLectureHall.getInstance().start(stage);
-                });
-            }
-        });
 
         pane.getChildren().addAll(viewMain);
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
         stage.show();
     }
+
 }
