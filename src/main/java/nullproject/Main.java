@@ -1,9 +1,17 @@
 package nullproject;
 
-public class Main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+import nullproject.menu.MainMenu;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        MainMenu.getInstance().start();
+    }
 
     public static void main(String[] args) {
-        InLectureHall inLectureHall = new InLectureHall();
-        inLectureHall.start();
+        launch(args);
     }
 }
