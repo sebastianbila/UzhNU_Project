@@ -30,7 +30,7 @@ public class Animation {
         translateTransition.play();
     }
 
-    public static void scaleTransition(Object node, int seconds, int fromX, int toX, int fromY, int toY){
+    public static void scaleTransition(Object node, double seconds, int fromX, int toX, int fromY, int toY){
         scaleTransition.setDuration(Duration.seconds(seconds));
         scaleTransition.setFromX(fromX);
         scaleTransition.setToX(toX);
