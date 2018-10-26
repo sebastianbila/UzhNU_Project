@@ -46,6 +46,8 @@ public class MainMenu {
 
         pane.getChildren().addAll(viewMain);
         scene.setFill(Color.BLACK);
+        stage.centerOnScreen();
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
