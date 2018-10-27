@@ -20,7 +20,7 @@ public class Blocks extends Pane {
 
     public Blocks(BlockType blockType, int x, int y) {
         block = new ImageView(blocksImg);
-        block.setFitWidth(GameConfigs.BLOCK_SIZE + 1);
+        block.setFitWidth(GameConfigs.BLOCK_SIZE);
         block.setFitHeight(GameConfigs.BLOCK_SIZE);
         setTranslateX(x);
         setTranslateY(y);

@@ -71,8 +71,8 @@ public class Game {
 
         });
 
-        player.setScaleX(GameConfigs.playerSize);
-        player.setScaleY(GameConfigs.playerSize);
+//        player.setScaleX(GameConfigs.playerSize);
+//        player.setScaleY(GameConfigs.playerSize);
 
         appRoot.getChildren().addAll(gameRoot);
 
@@ -110,16 +110,16 @@ public class Game {
         player = new Player();
         ImageView viewInAudience = new ImageView(InitImage.imageInGameAudience);
 
-        playerSpeed = 1;
+        playerSpeed = 3;
         //Set fixed width and height
         viewInAudience.fitWidthProperty().bind(scene.widthProperty());
         viewInAudience.fitHeightProperty().bind(scene.heightProperty());
 
         Level2.level2();
-        player.setTranslateX(100);
-        player.setTranslateY(350);
+        player.setTranslateX(50);
+        player.setTranslateY(200);
 
-        gameRoot.getChildren().addAll(player);
+        gameRoot.getChildren().addAll(viewInAudience, player);
     }
 
     private void update() {
@@ -127,19 +127,19 @@ public class Game {
 
         if (isPressed(KeyCode.UP)) {
             player.animation.play();
-            player.animation.setOffsetY(144);
+//            player.animation.setOffsetY(96);
             player.moveY(-playerSpeed);
         } else if (isPressed(KeyCode.DOWN)) {
             player.animation.play();
-            player.animation.setOffsetY(0);
+//            player.animation.setOffsetY(0);
             player.moveY(playerSpeed);
         } else if (isPressed(KeyCode.RIGHT)) {
             player.animation.play();
-            player.animation.setOffsetY(96);
+//            player.animation.setOffsetY(64);
             player.moveX(playerSpeed);
         } else if (isPressed(KeyCode.LEFT)) {
             player.animation.play();
-            player.animation.setOffsetY(48);
+//            player.animation.setOffsetY(32);
             player.moveX(-playerSpeed);
         } else {
             player.animation.stop();
@@ -168,7 +168,7 @@ public class Game {
             appRoot.getChildren().clear();
             platforms.clear();
             doors.clear();
-            playerSpeed = 1;
+            playerSpeed = 3;
             Game.getInstance().startGame(mainStage, Status.LEVEL_2);
         }
     }

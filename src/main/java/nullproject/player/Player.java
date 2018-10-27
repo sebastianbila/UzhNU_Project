@@ -17,26 +17,17 @@ import nullproject.player.interfaces.PlayerPower;
 import java.util.ConcurrentModificationException;
 
 public class Player extends Pane implements PlayerPower {
-//
-//    private int count = 3;
-//    private int column = 3;
-//    private int offer_x = 0;
-//    private int offer_y = 0;
-//    private int width = 32;
-//    private int height = 32;
-//    public SpriteAnimation animation;
-//    private DropShadow dropShadow;
 
-    private int count = 4;
-    private int column = 4;
-    private int offer_x = 0;
-    private int offer_y = 0;
-    private int width = 32;
-    private int height = 48;
+    int count = 3;
+    int column = 3;
+    int offer_x = 96;
+    int offer_y = 33;
+    int width = 16;
+    int height = 16;
     public SpriteAnimation animation;
     private DropShadow dropShadow;
 
-    Image image = new Image(getClass().getResourceAsStream("../../scene/game/sprite.png"));
+    Image image = new Image(getClass().getResourceAsStream("../../scene/game/mario.png"));
     ImageView imageView = new ImageView(image);
 
     public Player() {
@@ -47,6 +38,8 @@ public class Player extends Pane implements PlayerPower {
         dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
         imageView.setViewport(new Rectangle2D(offer_x, offer_y, width, height));
         imageView.setEffect(dropShadow);
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
         animation = new SpriteAnimation(imageView, Duration.millis(200), count, column, offer_x, offer_y, width, height);
         getChildren().addAll(imageView);
     }
@@ -58,7 +51,7 @@ public class Player extends Pane implements PlayerPower {
             for (Node platform : Game.platforms) {
                 if (getBoundsInParent().intersects(platform.getBoundsInParent())) {
                     if (movingRight) {
-                        if (getTranslateX() == platform.getTranslateX() - GameConfigs.BLOCK_SIZE) {
+                        if (getTranslateX() + GameConfigs.PLAYER_SIZE == platform.getTranslateX()) {
                             setTranslateX(getTranslateX() - 1);
                             return;
                         }
@@ -81,7 +74,7 @@ public class Player extends Pane implements PlayerPower {
             for (Node platform : Game.platforms) {
                 if (this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
                     if (movingDown) {
-                        if (this.getTranslateY() + GameConfigs.PLAYER_HEIGHT == platform.getTranslateY()) {
+                        if (this.getTranslateY() + GameConfigs.PLAYER_SIZE == platform.getTranslateY()) {
                             this.setTranslateY(this.getTranslateY() - 1);
                             return;
                         }
