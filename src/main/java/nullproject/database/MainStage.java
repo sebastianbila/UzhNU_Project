@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import nullproject.game_scene.InLectureHall;
 
 public class MainStage {
     //static Controller controller = new Controller();
@@ -84,6 +85,7 @@ public class MainStage {
                     System.out.println("неправильні дані");
                 }
                 System.out.println("OK!");
+                InLectureHall.getInstance().start(pStage);
             }
         });
 

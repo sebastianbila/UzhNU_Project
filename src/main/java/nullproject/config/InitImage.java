@@ -13,6 +13,7 @@ public class InitImage {
     public static Image imageInLectureHallSleepyBoy = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/sleepy_boy.png"));
     public static Image imageInLectureHallWelcomeToQuest = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/welcome_to_quest.png"));
     public static Image imageInLectureHallOpenedBook = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/opened_book.png"));
+    public static Image imageDialogBoy = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/text_dialog_boy.png"));
 
 
     public static Image imageInGameAudience = new Image(InitImage.class.getResourceAsStream("../../scene/in_game/audience.png"));
@@ -20,5 +21,6 @@ public class InitImage {
     public static Image imageInGameAudienceDoorClose = new Image(InitImage.class.getResourceAsStream("../../scene/in_game/door_close.png"));
     public static Image imageInGameAudienceTextOnDesk = new Image(InitImage.class.getResourceAsStream("../../scene/in_game/text_on_desk.png"));
     public static Image imageInGameAudienceInCorridor = new Image(InitImage.class.getResourceAsStream("../../scene/in_corridor/coridor.png"));
+    public static Image imageInGameAudience3 = new Image(InitImage.class.getResourceAsStream("../../scene/in_corridor/audience_3.png"));
 
 }

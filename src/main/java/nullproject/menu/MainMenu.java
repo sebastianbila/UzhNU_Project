@@ -44,8 +44,7 @@ public class MainMenu {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
 //                    InLectureHall.getInstance().start(stage);
-                    Game.getInstance().startGame(stage, Status.LEVEL_1);
-//                      MainStage.getInstance().start(stage);
+                      MainStage.getInstance().start(stage);
                 });
             }
         });

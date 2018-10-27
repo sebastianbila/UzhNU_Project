@@ -8,6 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+import nullproject.config.Status;
+import nullproject.game.Game;
+import nullproject.game_scene.InLectureHall;
 
 
 public class Registration {
@@ -141,6 +144,7 @@ public class Registration {
         accpetCod.setOnAction(event -> {
             if (codTF.getText().equals(sendEmail.requestCod)) {
                 if (!db.getUser(email.getText(), pass.getText())) db.addUser(email.getText(), pass.getText(), 0, "");
+                InLectureHall.getInstance().start(stage);
             } else {
                 codTF.setText("Коди не співпадають!");
                 codTF.setOnMouseClicked(e -> {

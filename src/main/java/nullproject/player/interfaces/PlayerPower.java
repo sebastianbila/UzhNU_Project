@@ -11,4 +11,9 @@ public interface PlayerPower {
     void onText();
 
     void onDoorBack();
+
+    void onDoorNext();
+
+    void onDoorNext2();
+
 }

@@ -48,7 +48,7 @@ public class ReadBookScene {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
                     Animation.getFadeTransition().stop();
-//                    Game.getInstance().startGame(stage, Status.LEVEL_1);
+                    Game.getInstance().startGame(stage, Status.LEVEL_1);
                 });
             }
         });

@@ -12,9 +12,7 @@ import nullproject.anim.SpriteAnimation;
 import nullproject.config.GameConfigs;
 import nullproject.config.Status;
 import nullproject.game.Game;
-import nullproject.levels.blocks.Door;
-import nullproject.levels.blocks.DoorBack;
-import nullproject.levels.blocks.Text;
+import nullproject.levels.blocks.*;
 import nullproject.player.interfaces.PlayerPower;
 
 import java.util.ConcurrentModificationException;
@@ -128,7 +126,32 @@ public class Player extends Pane implements PlayerPower {
         try {
             for (DoorBack doorBack : Game.doorsBack) {
                 if (this.getBoundsInParent().intersects(doorBack.getBoundsInParent())) {
-                    System.out.println("Checking");
+                    Game.getInstance().dialogBackDoor();
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+        }
+    }
+
+    @Override
+    public void onDoorNext() {
+        try {
+            for (DoorNext doorNext: Game.doorsNext) {
+                if (this.getBoundsInParent().intersects(doorNext.getBoundsInParent())) {
+                    System.out.println("neeext");
+                    Game.getInstance().dialogBackNext();
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+        }
+    }
+
+    @Override
+    public void onDoorNext2() {
+        try {
+            for (DoorBackBack doorBack: Game.doorsBackBack) {
+                if (this.getBoundsInParent().intersects(doorBack.getBoundsInParent())) {
+                    Game.getInstance().dialogBackBack();
                 }
             }
         } catch (ConcurrentModificationException e) {
