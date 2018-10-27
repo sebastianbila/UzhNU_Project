@@ -107,7 +107,6 @@ public class InLectureHall {
         });
 
         pane.getChildren().addAll(viewDialog, viewTeacherText, buttonNext);
-
     }
 
 }

@@ -1,14 +1,22 @@
 package nullproject.game;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.GameConfigs;
+import nullproject.config.InitImage;
+import nullproject.game_scene.ReadBookScene;
 import nullproject.levels.Level1;
 import nullproject.levels.blocks.Blocks;
+import nullproject.levels.blocks.Door;
 import nullproject.player.Player;
 
 import java.util.ArrayList;
@@ -19,6 +27,7 @@ public class Game {
 
     //Collections for the blocks
     public static ArrayList<Blocks> platforms = new ArrayList<>();
+    public static ArrayList<Door> doors = new ArrayList<>();
 
     //Key event
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
@@ -30,7 +39,11 @@ public class Game {
     //Player
     public Player player;
 
-    //===========Singleton======
+    //ImageView
+    private ImageView viewDialogOpenDoor = new ImageView(InitImage.imageInGameAudienceOpenDoor);
+    private Scene scene = new Scene(appRoot, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+
+
     private static Game ourInstance = new Game();
 
     public static Game getInstance() {
@@ -40,12 +53,9 @@ public class Game {
     private Game() {
         player = new Player();
     }
-    //=====================
-
 
     public void startGame(Stage gameStage) {
         gameInitialization();
-        Scene scene = new Scene(appRoot, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -83,10 +93,15 @@ public class Game {
                 gameRoot.setLayoutX(-(offset - 640));
             }
         });
-        gameRoot.getChildren().addAll(player);
+
+        gameRoot.getChildren().addAll(player, viewDialogOpenDoor);
+
+
     }
 
     private void update() {
+        viewDialogOpenDoor.setOpacity(0);
+
         if (isPressed(KeyCode.UP)) {
             player.animation.play();
             player.animation.setOffsetY(96);
@@ -106,10 +121,29 @@ public class Game {
         } else {
             player.animation.stop();
         }
+
+
+        player.isDoorOpen();
     }
 
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
+    }
+
+    public void showDialog() {
+
+        viewDialogOpenDoor.setFitWidth(540);
+        viewDialogOpenDoor.setFitHeight(150);
+
+        viewDialogOpenDoor.setTranslateX(500);
+        viewDialogOpenDoor.setTranslateY(420);
+
+        viewDialogOpenDoor.setOpacity(1);
+
+        if (isPressed(KeyCode.N)) {
+
+        }
+
     }
 
 }

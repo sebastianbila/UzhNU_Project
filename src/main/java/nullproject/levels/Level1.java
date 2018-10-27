@@ -2,6 +2,7 @@ package nullproject.levels;
 
 import nullproject.config.GameConfigs;
 import nullproject.levels.blocks.Blocks;
+import nullproject.levels.blocks.Door;
 
 public class Level1 {
 
@@ -35,7 +36,7 @@ public class Level1 {
                     case '0':
                         break;
                     case '8':
-                        Blocks platform = new Blocks(Blocks.BlockType.DIRT, j * GameConfigs.BLOCK_SIZE, i * GameConfigs.BLOCK_SIZE);
+                        Door platform = new Door(j * GameConfigs.BLOCK_SIZE, i * GameConfigs.BLOCK_SIZE);
                         break;
                     case '4':
                         break;

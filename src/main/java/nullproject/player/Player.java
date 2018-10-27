@@ -10,8 +10,12 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import nullproject.anim.SpriteAnimation;
 import nullproject.config.GameConfigs;
+import nullproject.game.Audience;
 import nullproject.game.Game;
+import nullproject.levels.blocks.Door;
 import nullproject.player.interfaces.PlayerPower;
+
+import java.util.ConcurrentModificationException;
 
 public class Player extends Pane implements PlayerPower {
 
@@ -22,7 +26,7 @@ public class Player extends Pane implements PlayerPower {
     private int width = 32;
     private int height = 32;
     public SpriteAnimation animation;
-    DropShadow dropShadow;
+    private DropShadow dropShadow;
 
     Image image = new Image(getClass().getResourceAsStream("../../scene/game/player.png"));
     ImageView imageView = new ImageView(image);
@@ -49,13 +53,11 @@ public class Player extends Pane implements PlayerPower {
                     if (movingRight) {
                         if (getTranslateX() == platform.getTranslateX() - GameConfigs.BLOCK_SIZE) {
                             setTranslateX(getTranslateX() - 1);
-                            System.out.println("Da");
                             return;
                         }
                     } else {
                         if (getTranslateX() == platform.getTranslateX() + GameConfigs.BLOCK_SIZE) {
                             setTranslateX(getTranslateX() + 1);
-                            System.out.println("Da");
                             return;
                         }
                     }
@@ -74,13 +76,11 @@ public class Player extends Pane implements PlayerPower {
                     if (movingDown) {
                         if (this.getTranslateY() + GameConfigs.PLAYER_SIZE == platform.getTranslateY()) {
                             this.setTranslateY(this.getTranslateY() - 1);
-                            System.out.println("Da");
                             return;
                         }
                     } else {
                         if (this.getTranslateY() == platform.getTranslateY() + GameConfigs.BLOCK_SIZE) {
                             this.setTranslateY(this.getTranslateY() + 1);
-                            System.out.println("Da");
                             return;
                         }
                     }
@@ -89,4 +89,18 @@ public class Player extends Pane implements PlayerPower {
             this.setTranslateY(this.getTranslateY() + (movingDown ? 1 : -1));
         }
     }
+
+    @Override
+    public void isDoorOpen() {
+        try {
+            for (Door coin : Game.doors) {
+                if (this.getBoundsInParent().intersects(coin.getBoundsInParent())) {
+                    Game.getInstance().showDialog();
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+        }
+    }
+
+
 }

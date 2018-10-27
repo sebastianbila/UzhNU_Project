@@ -16,5 +16,6 @@ public class InitImage {
 
 
     public static Image imageInGameAudience= new Image(InitImage.class.getResourceAsStream("../../scene/in_game/audience.png"));
+    public static Image imageInGameAudienceOpenDoor = new Image(InitImage.class.getResourceAsStream("../../scene/in_game/open_door.png"));
 
 }

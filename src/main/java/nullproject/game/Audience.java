@@ -13,35 +13,38 @@ import nullproject.config.GameConfigs;
 import nullproject.config.InitImage;
 import nullproject.game_scene.InLectureHall;
 import nullproject.game_scene.ReadBookScene;
+import nullproject.player.Player;
 
 public class Audience {
 
-    public void start(Stage stage){
+    private static Audience ourInstance = new Audience();
+
+    public static Audience getInstance() {
+        return ourInstance;
+    }
+
+    private Audience() {}
+
+    public void start() {
+        Stage stage = new Stage();
         Pane pane = new Pane();
         Scene scene = new Scene(pane, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
-        ImageView viewZoomSleepyBoy = new ImageView(InitImage.imageInLectureHallSleepyBoy);
-        ImageView viewWelcomeToQuest = new ImageView(InitImage.imageInLectureHallWelcomeToQuest);
-
-        viewWelcomeToQuest.setOpacity(0);
+        ImageView viewGameAudience = new ImageView(InitImage.imageInGameAudience);
 
         //Set fixed width and height
-        viewWelcomeToQuest.fitWidthProperty().bind(scene.widthProperty());
-        viewWelcomeToQuest.fitHeightProperty().bind(scene.heightProperty());
+        viewGameAudience.fitWidthProperty().bind(scene.widthProperty());
+        viewGameAudience.fitHeightProperty().bind(scene.heightProperty());
 
         //Set fixed width and height
-        viewZoomSleepyBoy.fitWidthProperty().bind(scene.widthProperty());
-        viewZoomSleepyBoy.fitHeightProperty().bind(scene.heightProperty());
+        viewGameAudience.fitWidthProperty().bind(scene.widthProperty());
+        viewGameAudience.fitHeightProperty().bind(scene.heightProperty());
 
-        Animation.fadeTransition(viewWelcomeToQuest, 5, 0, 1);
-        Animation.getFadeTransition().setOnFinished(e->{
-            Animation.getFadeTransition().stop();
-        });
-
-        pane.getChildren().addAll(viewZoomSleepyBoy, viewWelcomeToQuest);
+        pane.getChildren().addAll(viewGameAudience);
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
     }
+
 }
