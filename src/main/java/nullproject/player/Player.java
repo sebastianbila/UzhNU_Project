@@ -13,6 +13,7 @@ import nullproject.config.GameConfigs;
 import nullproject.config.Status;
 import nullproject.game.Game;
 import nullproject.levels.blocks.Door;
+import nullproject.levels.blocks.DoorBack;
 import nullproject.levels.blocks.Text;
 import nullproject.player.interfaces.PlayerPower;
 
@@ -116,6 +117,18 @@ public class Player extends Pane implements PlayerPower {
             for (Text text : Game.text) {
                 if (this.getBoundsInParent().intersects(text.getBoundsInParent())) {
                     Game.getInstance().dialogShowTextOnDesk();
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+        }
+    }
+
+    @Override
+    public void onDoorBack() {
+        try {
+            for (DoorBack doorBack : Game.doorsBack) {
+                if (this.getBoundsInParent().intersects(doorBack.getBoundsInParent())) {
+                    System.out.println("Checking");
                 }
             }
         } catch (ConcurrentModificationException e) {

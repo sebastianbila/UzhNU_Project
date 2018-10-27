@@ -2,7 +2,6 @@ package nullproject;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import nullproject.database.DatabaseHandler;
 import nullproject.game_scene.QuestMenu;
 import nullproject.menu.MainMenu;
 

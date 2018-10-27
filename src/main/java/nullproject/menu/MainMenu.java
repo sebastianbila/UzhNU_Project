@@ -1,6 +1,7 @@
 package nullproject.menu;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -10,6 +11,7 @@ import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.InitImage;
 import nullproject.config.Status;
+import nullproject.database.MainStage;
 import nullproject.game.Game;
 import nullproject.game_scene.InLectureHall;
 
@@ -43,12 +45,16 @@ public class MainMenu {
                 Animation.getFadeTransition().setOnFinished(event -> {
 //                    InLectureHall.getInstance().start(stage);
                     Game.getInstance().startGame(stage, Status.LEVEL_1);
+//                      MainStage.getInstance().start(stage);
                 });
             }
         });
 
         pane.getChildren().addAll(viewMain);
         scene.setFill(Color.BLACK);
+        stage.getIcons().add(new Image(MainMenu.class.getResourceAsStream("../../scene/ico/app_icon.png")));
+        stage.setTitle("Night in UzhNU");
+
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.setScene(scene);

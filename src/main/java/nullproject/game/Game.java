@@ -19,6 +19,7 @@ import nullproject.levels.Level2;
 import nullproject.levels.Level3;
 import nullproject.levels.blocks.Blocks;
 import nullproject.levels.blocks.Door;
+import nullproject.levels.blocks.DoorBack;
 import nullproject.levels.blocks.Text;
 import nullproject.player.Player;
 
@@ -32,6 +33,7 @@ public class Game {
     public static ArrayList<Blocks> platforms = new ArrayList<>();
     public static ArrayList<Door> doors = new ArrayList<>();
     public static ArrayList<Text> text = new ArrayList<>();
+    public static ArrayList<DoorBack> doorsBack = new ArrayList<>();
 
     //Key event
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
@@ -130,7 +132,7 @@ public class Game {
         viewOnCorridor.setOpacity(1);
 
         player = new Player();
-        playerSpeed = 5;
+        playerSpeed = 3;
         Level3.level3();
         player.setTranslateX(300);
         player.setTranslateY(250);
@@ -171,8 +173,8 @@ public class Game {
         }
         player.isDoorOpen();
         player.onText();
+        player.onDoorBack();
     }
-
 
     public void nextLevel() {
         gameRoot.getChildren().clear();
@@ -181,8 +183,6 @@ public class Game {
         doors.clear();
         Game.getInstance().startGame(mainStage, Status.LEVEL_2);
     }
-
-
 
     public void dialogShowTextOnDesk() {
         viewTextOnDesk.setOpacity(1);
@@ -234,10 +234,6 @@ public class Game {
                 Game.getInstance().startGame(mainStage, Status.LEVEL_1);
             }
         });
-
-        if (isPressed(KeyCode.W)) {
-
-        }
     }
 
     public boolean isCanExit() {
@@ -247,7 +243,6 @@ public class Game {
     public void setCanExit(boolean canExit) {
         isCanExit = canExit;
     }
-
 
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);

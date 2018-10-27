@@ -9,4 +9,6 @@ public interface PlayerPower {
     void isDoorOpen();
 
     void onText();
+
+    void onDoorBack();
 }
