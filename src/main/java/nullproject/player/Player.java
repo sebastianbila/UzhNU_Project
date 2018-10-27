@@ -12,6 +12,7 @@ import nullproject.anim.SpriteAnimation;
 import nullproject.config.GameConfigs;
 import nullproject.game.Game;
 import nullproject.levels.blocks.Door;
+import nullproject.levels.blocks.Text;
 import nullproject.player.interfaces.PlayerPower;
 
 import java.util.ConcurrentModificationException;
@@ -95,9 +96,9 @@ public class Player extends Pane implements PlayerPower {
         try {
             for (Door door : Game.doors) {
                 if (this.getBoundsInParent().intersects(door.getBoundsInParent())) {
-                    if (Game.getInstance().isCanExit() == false){
-                        System.out.println("You can't exit ... ");
-                    }else {
+                    if (Game.getInstance().isCanExit() == false) {
+                        Game.getInstance().dialogForbidExit();
+                    } else {
                         System.out.println("Exit ... ");
                     }
                 }
@@ -106,5 +107,15 @@ public class Player extends Pane implements PlayerPower {
         }
     }
 
-
+    @Override
+    public void onText() {
+        try {
+            for (Text text : Game.text) {
+                if (this.getBoundsInParent().intersects(text.getBoundsInParent())) {
+                    System.out.println("hell");
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+        }
+    }
 }

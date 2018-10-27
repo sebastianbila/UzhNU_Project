@@ -7,4 +7,6 @@ public interface PlayerPower {
     void moveY(int value);
 
     void isDoorOpen();
+
+    void onText();
 }
