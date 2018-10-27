@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.InitImage;
+import nullproject.game.Game;
 
 public class ReadBookScene {
 
@@ -46,6 +47,7 @@ public class ReadBookScene {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
                     Animation.getFadeTransition().stop();
+//                    Game.getInstance().startGame();
                 });
             }
         });

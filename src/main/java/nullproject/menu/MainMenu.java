@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.InitImage;
+import nullproject.game.Game;
 import nullproject.game_scene.InLectureHall;
-import nullproject.game_scene.QuestMenu;
 
 public class MainMenu {
 
@@ -40,8 +40,8 @@ public class MainMenu {
             if (e.getCode() == KeyCode.S) {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
-                    InLectureHall.getInstance().start(stage);
-//                    QuestMenu.getInstance().start(stage);
+//                    InLectureHall.getInstance().start(stage);
+                    Game.getInstance().startGame(stage);
                 });
             }
         });

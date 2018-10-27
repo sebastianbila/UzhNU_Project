@@ -14,4 +14,7 @@ public class InitImage {
     public static Image imageInLectureHallWelcomeToQuest = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/welcome_to_quest.png"));
     public static Image imageInLectureHallOpenedBook = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/opened_book.png"));
 
+
+    public static Image imageInGameAudience= new Image(InitImage.class.getResourceAsStream("../../scene/in_game/audience.png"));
+
 }
