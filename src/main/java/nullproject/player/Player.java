@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import nullproject.anim.SpriteAnimation;
 import nullproject.config.GameConfigs;
+import nullproject.config.Status;
 import nullproject.game.Game;
 import nullproject.levels.blocks.Door;
 import nullproject.levels.blocks.Text;
@@ -97,9 +98,11 @@ public class Player extends Pane implements PlayerPower {
             for (Door door : Game.doors) {
                 if (this.getBoundsInParent().intersects(door.getBoundsInParent())) {
                     if (Game.getInstance().isCanExit() == false) {
-                        Game.getInstance().dialogForbidExit();
+                        System.out.println("Can't exit ... ");
+                        Game.getInstance().dialogShow();
                     } else {
                         System.out.println("Exit ... ");
+                        Game.getInstance().dialogShow();
                     }
                 }
             }
@@ -112,7 +115,7 @@ public class Player extends Pane implements PlayerPower {
         try {
             for (Text text : Game.text) {
                 if (this.getBoundsInParent().intersects(text.getBoundsInParent())) {
-                    System.out.println("hell");
+                    Game.getInstance().dialogShowTextOnDesk();
                 }
             }
         } catch (ConcurrentModificationException e) {

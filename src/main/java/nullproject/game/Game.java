@@ -15,8 +15,8 @@ import nullproject.config.GameConfigs;
 import nullproject.config.InitImage;
 import nullproject.config.Status;
 import nullproject.game_scene.ReadBookScene;
-import nullproject.levels.Level1;
 import nullproject.levels.Level2;
+import nullproject.levels.Level3;
 import nullproject.levels.blocks.Blocks;
 import nullproject.levels.blocks.Door;
 import nullproject.levels.blocks.Text;
@@ -45,12 +45,12 @@ public class Game {
 
     private int playerSpeed = 3;
     private boolean isCanExit = false;
-    private int status = 1;
 
     //ImageView
     private ImageView viewDialogOpenDoor = new ImageView(InitImage.imageInGameAudienceOpenDoor);
     private ImageView viewDialogDoorIsClosed = new ImageView(InitImage.imageInGameAudienceDoorClose);
     private ImageView viewTextOnDesk = new ImageView(InitImage.imageInGameAudienceTextOnDesk);
+    private ImageView viewOnCorridor = new ImageView(InitImage.imageInGameAudienceInCorridor);
 
     private Scene scene = new Scene(appRoot, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
     private Stage mainStage = new Stage();
@@ -69,7 +69,7 @@ public class Game {
         if (status == Status.LEVEL_1) {
             gameInitialization();
         } else if (status == Status.LEVEL_2) {
-            gameInitializationL2();
+            gameInitializationLevel2();
         }
 
         mainStage = gameStage;
@@ -86,6 +86,10 @@ public class Game {
         //Set fixed width and height
         viewDialogDoorIsClosed.fitWidthProperty().bind(scene.widthProperty());
         viewDialogDoorIsClosed.fitHeightProperty().bind(scene.heightProperty());
+
+        //Set fixed width and height
+        viewOnCorridor.fitWidthProperty().bind(scene.widthProperty());
+        viewOnCorridor.fitHeightProperty().bind(scene.heightProperty());
 
         appRoot.getChildren().addAll(gameRoot);
 
@@ -119,15 +123,17 @@ public class Game {
         player.setTranslateX(150);
         player.setTranslateY(400);
 
-        gameRoot.getChildren().addAll(viewInAudience, viewDialogDoorIsClosed, player);
+        gameRoot.getChildren().addAll(viewInAudience, viewDialogDoorIsClosed, viewTextOnDesk, viewDialogOpenDoor, player);
     }
 
-    public void gameInitializationL2() {
+    public void gameInitializationLevel2() {
+        viewOnCorridor.setOpacity(1);
+
         player = new Player();
         playerSpeed = 5;
-        Level1.level1();
-        player.setTranslateX(50);
-        player.setTranslateY(350);
+        Level3.level3();
+        player.setTranslateX(300);
+        player.setTranslateY(250);
         player.translateXProperty().addListener((obs, old, newValue) -> {
             int offset = newValue.intValue();
             if (offset > 640 && offset < GameConfigs.levelsWidth - 640) {
@@ -135,11 +141,12 @@ public class Game {
             }
         });
 
-        gameRoot.getChildren().addAll(player, viewDialogOpenDoor);
+        gameRoot.getChildren().addAll(viewDialogOpenDoor, viewDialogDoorIsClosed, viewOnCorridor, player);
     }
 
     private void update() {
         viewDialogOpenDoor.setOpacity(0);
+        viewTextOnDesk.setOpacity(0);
 
         if (isPressed(KeyCode.UP)) {
             player.animation.play();
@@ -163,53 +170,75 @@ public class Game {
             player.animation.stop();
         }
         player.isDoorOpen();
-        player.isDoorOpen();
+        player.onText();
     }
 
 
-    public void showDialog() {
-        viewDialogOpenDoor.setFitWidth(540);
-        viewDialogOpenDoor.setFitHeight(150);
+    public void nextLevel() {
+        gameRoot.getChildren().clear();
+        appRoot.getChildren().clear();
+        platforms.clear();
+        doors.clear();
+        Game.getInstance().startGame(mainStage, Status.LEVEL_2);
+    }
 
-        viewDialogOpenDoor.setTranslateX(500);
-        viewDialogOpenDoor.setTranslateY(420);
 
+
+    public void dialogShowTextOnDesk() {
+        viewTextOnDesk.setOpacity(1);
+
+        viewTextOnDesk.setTranslateX(340);
+        viewTextOnDesk.setTranslateY(60);
+
+        playerSpeed = 3;
+
+        if (isPressed(KeyCode.K)) {
+            setCanExit(true);
+        }
+    }
+
+    public void dialogShow() {
         viewDialogOpenDoor.setOpacity(1);
+
+        viewDialogOpenDoor.setTranslateX(0);
+        viewDialogOpenDoor.setTranslateY(0);
 
         if (isPressed(KeyCode.N)) {
             if (isCanExit() == false) {
                 dialogForbidExit();
             } else {
-                gameRoot.getChildren().clear();
-                appRoot.getChildren().clear();
-                platforms.clear();
-                doors.clear();
-                playerSpeed = 3;
-                Game.getInstance().startGame(mainStage, Status.LEVEL_2);
+                nextLevel();
             }
         }
+
     }
 
     public void dialogForbidExit() {
         viewDialogDoorIsClosed.setOpacity(1);
-        if (isPressed(KeyCode.C)) {
-            System.out.println("Click ");
-            player.setTranslateX(150);
-            player.setTranslateY(400);
-            gameRoot.getChildren().clear();
-            appRoot.getChildren().clear();
-            playerSpeed = 3;
-            platforms.clear();
-            doors.clear();
-            Game.getInstance().startGame(mainStage, Status.LEVEL_1);
+        playerSpeed = 0;
+        player.setTranslateX(150);
+        player.setTranslateY(400);
+
+        System.out.println("heeeee");
+
+
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.C) {
+                System.out.println("A key was pressed");
+                System.out.println("Fdd");
+                gameRoot.getChildren().clear();
+                appRoot.getChildren().clear();
+                playerSpeed = 3;
+                platforms.clear();
+                doors.clear();
+                Game.getInstance().startGame(mainStage, Status.LEVEL_1);
+            }
+        });
+
+        if (isPressed(KeyCode.W)) {
+
         }
     }
-
-    public void dialogShowTextOnDesk() {
-        viewTextOnDesk.setOpacity(1);
-
-    }
-
 
     public boolean isCanExit() {
         return isCanExit;
@@ -219,13 +248,6 @@ public class Game {
         isCanExit = canExit;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
