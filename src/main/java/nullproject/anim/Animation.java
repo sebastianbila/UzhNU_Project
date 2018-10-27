@@ -1,6 +1,7 @@
 package nullproject.anim;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
@@ -12,7 +13,7 @@ public class Animation {
     private static TranslateTransition translateTransition = new TranslateTransition(); //Translate animation
     private static ScaleTransition scaleTransition = new ScaleTransition(); //Scale animation
 
-    public static void fadeTransition(Object node, int seconds, int fromValue, int toValue){
+    public static void fadeTransition(Object node, int seconds, int fromValue, int toValue) {
         fadeTransition.setDuration(Duration.seconds(seconds));
         fadeTransition.setFromValue(fromValue);
         fadeTransition.setToValue(toValue);
@@ -20,7 +21,7 @@ public class Animation {
         fadeTransition.play();
     }
 
-    public static void translateTransition(Object node, int seconds, int fromX, int toX, int fromY, int toY){
+    public static void translateTransition(Object node, int seconds, int fromX, int toX, int fromY, int toY) {
         translateTransition.setDuration(Duration.seconds(seconds));
         translateTransition.setFromX(fromX);
         translateTransition.setToX(toX);
@@ -30,7 +31,7 @@ public class Animation {
         translateTransition.play();
     }
 
-    public static void scaleTransition(Object node, double seconds, int fromX, int toX, int fromY, int toY){
+    public static void scaleTransition(Object node, double seconds, int fromX, int toX, int fromY, int toY) {
         scaleTransition.setDuration(Duration.seconds(seconds));
         scaleTransition.setFromX(fromX);
         scaleTransition.setToX(toX);

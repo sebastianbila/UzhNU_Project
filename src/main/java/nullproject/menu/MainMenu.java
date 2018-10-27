@@ -40,8 +40,8 @@ public class MainMenu {
             if (e.getCode() == KeyCode.S) {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
-//                    InLectureHall.getInstance().start(stage);
-                    QuestMenu.getInstance().start(stage);
+                    InLectureHall.getInstance().start(stage);
+//                    QuestMenu.getInstance().start(stage);
                 });
             }
         });

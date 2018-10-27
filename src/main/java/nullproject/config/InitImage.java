@@ -12,5 +12,6 @@ public class InitImage {
     public static Image imageInLectureHallButtonNext = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/button_next.png"));
     public static Image imageInLectureHallSleepyBoy = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/sleepy_boy.png"));
     public static Image imageInLectureHallWelcomeToQuest = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/welcome_to_quest.png"));
+    public static Image imageInLectureHallOpenedBook = new Image(InitImage.class.getResourceAsStream("../../scene/in_hall/opened_book.png"));
 
 }
