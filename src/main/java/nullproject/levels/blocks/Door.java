@@ -9,7 +9,7 @@ import nullproject.game.Game;
 
 public class Door extends Blocks {
 
-    private Image blockDoor = new Image(getClass().getResourceAsStream("../../../scene/game/door.png"));
+    private Image blockDoor = new Image(getClass().getResourceAsStream("../../../scene/game/tiles.png"));
     private ImageView viewDoor = new ImageView(blockDoor);
 
     public Door(int x, int y) {

@@ -18,16 +18,16 @@ import java.util.ConcurrentModificationException;
 
 public class Player extends Pane implements PlayerPower {
 
-    int count = 3;
-    int column = 3;
-    int offer_x = 96;
-    int offer_y = 33;
-    int width = 16;
-    int height = 16;
+    int count = 4;
+    int column = 4;
+    int offer_x = 0;
+    int offer_y = 0;
+    int width = 32;
+    int height = 48;
     public SpriteAnimation animation;
     private DropShadow dropShadow;
 
-    Image image = new Image(getClass().getResourceAsStream("../../scene/game/mario.png"));
+    Image image = new Image(getClass().getResourceAsStream("../../scene/game/sprite.png"));
     ImageView imageView = new ImageView(image);
 
     public Player() {
@@ -38,8 +38,8 @@ public class Player extends Pane implements PlayerPower {
         dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
         imageView.setViewport(new Rectangle2D(offer_x, offer_y, width, height));
         imageView.setEffect(dropShadow);
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(40);
+        imageView.setFitHeight(GameConfigs.PLAYER_HEIGHT);
+        imageView.setFitWidth(GameConfigs.PLAYER_WIDTH);
         animation = new SpriteAnimation(imageView, Duration.millis(200), count, column, offer_x, offer_y, width, height);
         getChildren().addAll(imageView);
     }
@@ -51,7 +51,7 @@ public class Player extends Pane implements PlayerPower {
             for (Node platform : Game.platforms) {
                 if (getBoundsInParent().intersects(platform.getBoundsInParent())) {
                     if (movingRight) {
-                        if (getTranslateX() + GameConfigs.PLAYER_SIZE == platform.getTranslateX()) {
+                        if (getTranslateX() + GameConfigs.PLAYER_WIDTH == platform.getTranslateX()) {
                             setTranslateX(getTranslateX() - 1);
                             return;
                         }
@@ -74,7 +74,7 @@ public class Player extends Pane implements PlayerPower {
             for (Node platform : Game.platforms) {
                 if (this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
                     if (movingDown) {
-                        if (this.getTranslateY() + GameConfigs.PLAYER_SIZE == platform.getTranslateY()) {
+                        if (this.getTranslateY() + GameConfigs.PLAYER_HEIGHT == platform.getTranslateY()) {
                             this.setTranslateY(this.getTranslateY() - 1);
                             return;
                         }
@@ -93,9 +93,13 @@ public class Player extends Pane implements PlayerPower {
     @Override
     public void isDoorOpen() {
         try {
-            for (Door coin : Game.doors) {
-                if (this.getBoundsInParent().intersects(coin.getBoundsInParent())) {
-                    Game.getInstance().showDialog();
+            for (Door door : Game.doors) {
+                if (this.getBoundsInParent().intersects(door.getBoundsInParent())) {
+                    if (Game.getInstance().isCanExit() == false){
+                        System.out.println("You can't exit ... ");
+                    }else {
+                        System.out.println("Exit ... ");
+                    }
                 }
             }
         } catch (ConcurrentModificationException e) {

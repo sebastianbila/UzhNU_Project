@@ -15,7 +15,7 @@ public class Blocks extends Pane {
     }
 
     public enum BlockType {
-        PLATFORM, INVISIBLE_BLOCK
+        INVISIBLE_BLOCK
     }
 
     public Blocks(BlockType blockType, int x, int y) {
@@ -26,9 +26,6 @@ public class Blocks extends Pane {
         setTranslateY(y);
 
         switch (blockType) {
-            case PLATFORM:
-                block.setViewport(new Rectangle2D(128, 0, 32, 32));
-                break;
             case INVISIBLE_BLOCK:
                 block.setViewport(new Rectangle2D(0, 0, 32, 32));
                 break;

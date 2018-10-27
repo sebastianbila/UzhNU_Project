@@ -41,12 +41,14 @@ public class Game {
     //Player
     public Player player;
 
-    private int playerSpeed = 5;
+    private int playerSpeed = 3;
 
     //ImageView
     private ImageView viewDialogOpenDoor = new ImageView(InitImage.imageInGameAudienceOpenDoor);
     private Scene scene = new Scene(appRoot, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
     private Stage mainStage = new Stage();
+
+    private boolean isCanExit = false;
 
     private static Game ourInstance = new Game();
 
@@ -54,7 +56,8 @@ public class Game {
         return ourInstance;
     }
 
-    private Game() {}
+    private Game() {
+    }
 
     public void startGame(Stage gameStage, Status status) {
 
@@ -63,6 +66,7 @@ public class Game {
         } else if (status == Status.LEVEL_2) {
             gameInitializationL2();
         }
+
         mainStage = gameStage;
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -71,8 +75,8 @@ public class Game {
 
         });
 
-//        player.setScaleX(GameConfigs.playerSize);
-//        player.setScaleY(GameConfigs.playerSize);
+        player.setScaleX(GameConfigs.playerSize);
+        player.setScaleY(GameConfigs.playerSize);
 
         appRoot.getChildren().addAll(gameRoot);
 
@@ -91,22 +95,7 @@ public class Game {
     }
 
     public void gameInitialization() {
-        player = new Player();
-        playerSpeed = 5;
-        Level1.level1();
-        player.setTranslateX(50);
-        player.setTranslateY(350);
-        player.translateXProperty().addListener((obs, old, newValue) -> {
-            int offset = newValue.intValue();
-            if (offset > 640 && offset < GameConfigs.levelsWidth - 640) {
-                gameRoot.setLayoutX(-(offset - 640));
-            }
-        });
 
-        gameRoot.getChildren().addAll(player, viewDialogOpenDoor);
-    }
-
-    public void gameInitializationL2() {
         player = new Player();
         ImageView viewInAudience = new ImageView(InitImage.imageInGameAudience);
 
@@ -122,29 +111,46 @@ public class Game {
         gameRoot.getChildren().addAll(viewInAudience, player);
     }
 
+    public void gameInitializationL2() {
+        player = new Player();
+        playerSpeed = 5;
+        Level1.level1();
+        player.setTranslateX(50);
+        player.setTranslateY(350);
+        player.translateXProperty().addListener((obs, old, newValue) -> {
+            int offset = newValue.intValue();
+            if (offset > 640 && offset < GameConfigs.levelsWidth - 640) {
+                gameRoot.setLayoutX(-(offset - 640));
+            }
+        });
+
+        gameRoot.getChildren().addAll(player, viewDialogOpenDoor);
+    }
+
     private void update() {
         viewDialogOpenDoor.setOpacity(0);
 
         if (isPressed(KeyCode.UP)) {
             player.animation.play();
-//            player.animation.setOffsetY(96);
+            player.animation.setOffsetY(144);
             player.moveY(-playerSpeed);
         } else if (isPressed(KeyCode.DOWN)) {
             player.animation.play();
-//            player.animation.setOffsetY(0);
+            player.animation.setOffsetY(0);
             player.moveY(playerSpeed);
         } else if (isPressed(KeyCode.RIGHT)) {
             player.animation.play();
-//            player.animation.setOffsetY(64);
+            player.animation.setOffsetY(96);
             player.moveX(playerSpeed);
+
         } else if (isPressed(KeyCode.LEFT)) {
             player.animation.play();
-//            player.animation.setOffsetY(32);
+            player.animation.setOffsetY(48);
             player.moveX(-playerSpeed);
+
         } else {
             player.animation.stop();
         }
-
 
         player.isDoorOpen();
     }
@@ -173,5 +179,12 @@ public class Game {
         }
     }
 
+    public boolean isCanExit() {
+        return isCanExit;
+    }
+
+    public void setCanExit(boolean canExit) {
+        isCanExit = canExit;
+    }
 }
 
