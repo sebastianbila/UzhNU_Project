@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import nullproject.anim.SpriteAnimation;
 import nullproject.config.GameConfigs;
-import nullproject.game.Audience;
 import nullproject.game.Game;
 import nullproject.levels.blocks.Door;
 import nullproject.player.interfaces.PlayerPower;
@@ -18,17 +17,26 @@ import nullproject.player.interfaces.PlayerPower;
 import java.util.ConcurrentModificationException;
 
 public class Player extends Pane implements PlayerPower {
+//
+//    private int count = 3;
+//    private int column = 3;
+//    private int offer_x = 0;
+//    private int offer_y = 0;
+//    private int width = 32;
+//    private int height = 32;
+//    public SpriteAnimation animation;
+//    private DropShadow dropShadow;
 
-    private int count = 3;
-    private int column = 3;
+    private int count = 4;
+    private int column = 4;
     private int offer_x = 0;
     private int offer_y = 0;
     private int width = 32;
-    private int height = 32;
+    private int height = 48;
     public SpriteAnimation animation;
     private DropShadow dropShadow;
 
-    Image image = new Image(getClass().getResourceAsStream("../../scene/game/player.png"));
+    Image image = new Image(getClass().getResourceAsStream("../../scene/game/sprite.png"));
     ImageView imageView = new ImageView(image);
 
     public Player() {
@@ -41,7 +49,6 @@ public class Player extends Pane implements PlayerPower {
         imageView.setEffect(dropShadow);
         animation = new SpriteAnimation(imageView, Duration.millis(200), count, column, offer_x, offer_y, width, height);
         getChildren().addAll(imageView);
-
     }
 
     @Override
@@ -74,7 +81,7 @@ public class Player extends Pane implements PlayerPower {
             for (Node platform : Game.platforms) {
                 if (this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
                     if (movingDown) {
-                        if (this.getTranslateY() + GameConfigs.PLAYER_SIZE == platform.getTranslateY()) {
+                        if (this.getTranslateY() + GameConfigs.PLAYER_HEIGHT == platform.getTranslateY()) {
                             this.setTranslateY(this.getTranslateY() - 1);
                             return;
                         }

@@ -3,19 +3,20 @@ package nullproject.levels;
 import nullproject.config.GameConfigs;
 import nullproject.levels.blocks.Blocks;
 import nullproject.levels.blocks.Door;
+import nullproject.player.Player;
 
-public class Level1 {
+public class Level2 {
 
-     static String[] LEVEL1 = new String[]{
+     static String[] LEVEL2 = new String[]{
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-            "0,0,0,0,0,8,0,0,0,0,0,0,8,0,0,0,8,0,0,0,0,0,0,0,0,0,0,8,0,0",
+            "0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,8,0,0,0,0,0,0,0,0,0,0,8,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-            "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-            "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8",
+            "0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+            "0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0",
             "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -25,27 +26,18 @@ public class Level1 {
     };
 
     public static String[][] levels = new String[][]{
-            LEVEL1
+            LEVEL2
     };
 
-    public static void level1(){
+    public static void level2(){
         for (int i = 0; i < GameConfigs.level1Length; i++) {
-            String line = Level1.levels[GameConfigs.lvl][i];
+            String line = Level2.levels[GameConfigs.lvl][i];
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
                     case '0':
                         break;
-                    case '8':
-                        Door platform = new Door(j * GameConfigs.BLOCK_SIZE, i * GameConfigs.BLOCK_SIZE);
-                        break;
-                    case '4':
-                        break;
-                    case '5':
-
-                        break;
-                    case '6':
-                        break;
-                    case '7':
+                    case '3':
+                        Blocks platform = new Blocks(Blocks.BlockType.INVISIBLE_BLOCK, j * GameConfigs.BLOCK_SIZE, i * GameConfigs.BLOCK_SIZE);
                         break;
                 }
             }

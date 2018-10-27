@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import nullproject.anim.Animation;
 import nullproject.config.Config;
 import nullproject.config.InitImage;
+import nullproject.config.Status;
 import nullproject.game.Game;
 import nullproject.game_scene.InLectureHall;
 
@@ -41,7 +42,7 @@ public class MainMenu {
                 Animation.fadeTransition(pane, 1, 1, 0);
                 Animation.getFadeTransition().setOnFinished(event -> {
 //                    InLectureHall.getInstance().start(stage);
-                    Game.getInstance().startGame(stage);
+                    Game.getInstance().startGame(stage, Status.LEVEL_1);
                 });
             }
         });
